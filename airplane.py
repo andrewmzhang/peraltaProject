@@ -30,7 +30,7 @@ def shutdownAllNodes():
 
 
 
-def decisionTree(int x) 
+def decisionTree(int x):
 	shutdownAllNodes()
 	if x == 4:
 		GPIO.output(21, True)
@@ -56,13 +56,14 @@ def decisionTree(int x)
 }
 
 def lastPinDetector():
-	lastState = false;
+	lastState = True;
 	currentState = GPIO.input(18)
 	
 	while True:
 		currentState = GPIO.input(18)
 		if (lastState != currentState):
-			GPIO.output(25 True)
+			print("current state" + currentState)
+			GPIO.output(25, True)
 			playSound()
 			print("trigger detected!")
 			lastState = currentState
