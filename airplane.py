@@ -2,16 +2,16 @@ import RPi.GPIO as GPIO
 import PiFm
 GPIO.setmode(GPIO.BCM)
 
-GPIO.setup(4, GPIO.IN)
-GPIO.setup(7, GPIO.IN)
-GPIO.setup(8, GPIO.IN)
-GPIO.setup(17, GPIO.IN)
+#GPIO.setup(4, GPIO.IN)
+#GPIO.setup(7, GPIO.IN)
+#GPIO.setup(8, GPIO.IN)
+#GPIO.setup(17, GPIO.IN)
 GPIO.setup(18, GPIO.IN)
 
-GPIO.setup(21, GPIO.OUT)
-GPIO.setup(22, GPIO.OUT)
-GPIO.setup(23, GPIO.OUT)
-GPIO.setup(24, GPIO.OUT)
+#GPIO.setup(21, GPIO.OUT)
+#GPIO.setup(22, GPIO.OUT)
+#GPIO.setup(23, GPIO.OUT)
+#GPIO.setup(24, GPIO.OUT)
 GPIO.setup(25, GPIO.OUT)
 
 def detection(): 
@@ -30,7 +30,7 @@ def shutdownAllNodes():
 
 
 
-def decisionTree(int x):
+def decisionTree(x):
 	shutdownAllNodes()
 	if x == 4:
 		GPIO.output(21, True)
@@ -53,7 +53,7 @@ def decisionTree(int x):
 		GPIO.output(22, True)
 		GPIO.output(21, True)
 		playSound()
-}
+
 
 def lastPinDetector():
 	lastState = True;
@@ -62,13 +62,14 @@ def lastPinDetector():
 	while True:
 		currentState = GPIO.input(18)
 		if (lastState != currentState):
-			print("current state" + currentState)
+			print("current state" + str(currentState))
 			GPIO.output(25, True)
-			playSound()
+			if (currentState == 1):
+				playSound()
 			print("trigger detected!")
 			lastState = currentState
 
 def playSound():
-	PiFm.play_sound("boom.wav")
+	PiFm.play_sound("sound.wav")
 
-
+lastPinDetector()
